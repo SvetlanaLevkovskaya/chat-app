@@ -7,9 +7,11 @@ const MessageFormUI = ({
                            message,
                            handleChange,
                            handleSubmit,
+                           appendText,
+                           handleKeyDown
                        }) => {
 
-    const [preview, setPreview] = React.useState("");
+    const [ preview, setPreview ] = React.useState("");
 
     return (
       <div className="message-form-container">
@@ -24,10 +26,20 @@ const MessageFormUI = ({
           </div>)}
           <div className="message-form">
               <div className="message-form-input-container">
-                  <input className="message-form-input" type="text" value={message}
+                  <input className="message-form-input"
+                         type="text"
+                         value={message}
                          onChange={handleChange}
+                         onKeyDown={handleKeyDown}
                          placeholder="Type a message..."
                   />
+                  {appendText && (
+                    <input className='message-form-assist'
+                    type='text'
+                    disabled='disabled'
+                    value={`${message} ${appendText}`}
+                    />
+                  )}
               </div>
               <div className="message-form-icons">
                   <Dropzone acceptedFiles=".jpg, .jpeg, .png"
